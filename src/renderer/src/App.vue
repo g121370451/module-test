@@ -22,13 +22,13 @@
       <PluginContainer 
         v-show="currentTab === 'L136'"
         :active="currentTab === 'L136'"
-        plugin-path="E:\\project\\deepcool\\nodejs\\module-test\\plugins\\device-l136\\out" 
+        plugin-path="plugins/device-l136/out" 
       />
       
       <PluginContainer 
         v-show="currentTab === 'L086'"
         :active="currentTab === 'L086'"
-        plugin-path="E:\\project\\deepcool\\nodejs\\module-test\\plugins\\device-l136\\out" 
+        plugin-path="plugins/device-l086/out" 
       />
       
       <div v-if="!currentTab" class="empty-state">请选择设备</div>
