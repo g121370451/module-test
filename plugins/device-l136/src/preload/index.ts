@@ -2,7 +2,7 @@ import { contextBridge, ipcRenderer } from 'electron'
 
 // 这是一个闭包变量，用来持有端口
 let servicePort: MessagePort | null = null;
-
+console.log('[Preload] 预加载脚本已启动');
 // 等待主进程 (Dev) 或 宿主 (Prod) 发送端口过来
 ipcRenderer.on('init-port', (event) => {
   console.log('[Preload] 收到通信端口');

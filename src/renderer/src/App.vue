@@ -22,13 +22,13 @@
       <PluginContainer 
         v-show="currentTab === 'L136'"
         :active="currentTab === 'L136'"
-        plugin-path="plugins/device-l136/out" 
+        plugin-path="plugins/l136/out" 
       />
       
       <PluginContainer 
         v-show="currentTab === 'L086'"
         :active="currentTab === 'L086'"
-        plugin-path="plugins/device-l086/out" 
+        plugin-path="plugins/l086/out" 
       />
       
       <div v-if="!currentTab" class="empty-state">请选择设备</div>
@@ -49,6 +49,8 @@ html, body, #app { height: 100%; margin: 0; }
 .sidebar { width: 250px; background: #2b2b2b; color: #fff; padding: 20px; }
 .content-area {
   flex: 1;
+  width: 200px;
+  height: 200px;
   display: flex;       /* 关键 */
   flex-direction: column; /* 关键 */
   height: 100%;        /* 关键 */

@@ -1,3 +1,5 @@
+import { crc16xmodem } from "crc";
+
 // 模拟硬件操作
 export class L136Service {
     private port;
@@ -27,6 +29,8 @@ export class L136Service {
             case 'connect-device':
                 // 模拟连接硬件
                 this.port.postMessage({ channel: 'status', data: 'Connected: COM3' });
+                const crcCalc = crc16xmodem(Buffer.from('1234567890'));
+                console.log(`CRC16: ${crcCalc}`);
                 this.startDataStream();
                 break;
             case 'stop-device':

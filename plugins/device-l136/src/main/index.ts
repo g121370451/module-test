@@ -98,7 +98,7 @@ if (isDev) {
         // 在 Node 环境下，e.ports[0] 是 Node 的 MessagePort 类型
         // 虽然它和 Electron 的 MessagePortMain 类型定义不同，但功能兼容
         const port2 = e.ports[0]
-        
+        console.log(`ports is ${JSON.stringify(port2)}`)
         // 我们在下面会处理 L136Service 的类型兼容性
         new L136Service(port2 as any)
 
