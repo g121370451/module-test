@@ -5,7 +5,8 @@ import { electronAPI } from '@electron-toolkit/preload'
 const api = {
   mountPlugin: (pluginPath, rect) => ipcRenderer.invoke('plugin:mount', { pluginPath, rect }),
   unmountPlugin: (pluginId) => ipcRenderer.invoke('plugin:unmount', pluginId),
-  updatePluginBounds: (pluginId, rect) => ipcRenderer.send('plugin:update-bounds', { pluginId, rect })
+  updatePluginBounds: (pluginId, rect) =>
+    ipcRenderer.send('plugin:update-bounds', { pluginId, rect })
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to
