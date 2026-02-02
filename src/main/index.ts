@@ -3,6 +3,7 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import { PluginManager } from './PluginManager'
+import bootstrap from './bootstrap'
 let pluginManager: PluginManager | null = null
 function createWindow(): void {
   // Create the browser window.
@@ -34,6 +35,7 @@ function createWindow(): void {
   } else {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
+  bootstrap()
   pluginManager = new PluginManager(mainWindow)
 }
 

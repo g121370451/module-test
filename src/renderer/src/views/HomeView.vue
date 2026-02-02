@@ -34,7 +34,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="card log-panel">
       <h3>最近活动</h3>
       <ul class="log-list">
@@ -52,10 +52,32 @@ export default defineComponent({ name: 'HomeView' })
 
 <style scoped>
 /* 局部样式，具体实现在全局 CSS 中复用 */
-.glow-green { border-bottom: 2px solid var(--success); }
-.glow-orange { border-bottom: 2px solid var(--warning); }
-.log-panel { margin-top: 20px; flex: 1; display: flex; flex-direction: column; }
-.log-list { list-style: none; padding: 0; margin: 10px 0 0; font-family: 'Consolas', monospace; font-size: 13px; color: #888; }
-.log-list li { padding: 4px 0; border-bottom: 1px solid #333; }
-.time { color: #569cd6; margin-right: 10px; }
+.glow-green {
+  border-bottom: 2px solid var(--success);
+}
+.glow-orange {
+  border-bottom: 2px solid var(--warning);
+}
+.log-panel {
+  margin-top: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.log-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  font-family: 'Consolas', monospace;
+  font-size: 13px;
+  color: #888;
+}
+.log-list li {
+  padding: 4px 0;
+  border-bottom: 1px solid #333;
+}
+.time {
+  color: #569cd6;
+  margin-right: 10px;
+}
 </style>
