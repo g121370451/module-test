@@ -4,13 +4,8 @@
       <div class="logo-area"><span class="logo-icon">⚡</span> KERNEL</div>
 
       <nav class="nav">
-        <div
-          v-for="tab in tabs"
-          :key="tab.id"
-          class="nav-item"
-          :class="{ active: currentTab === tab.id }"
-          @click="currentTab = tab.id"
-        >
+        <div v-for="tab in tabs" :key="tab.id" class="nav-item" :class="{ active: currentTab === tab.id }"
+          @click="currentTab = tab.id">
           <span class="nav-icon" v-html="tab.icon"></span>
           <span class="nav-label">{{ tab.label }}</span>
         </div>
@@ -28,14 +23,8 @@
     <main class="main-content">
       <transition name="fade" mode="out-in">
         <keep-alive>
-          <component
-            :is="currentViewComponent"
-            v-bind="currentProps"
-            @download="handleDownload"
-            @run="handleRun"
-            @stop="handleStop"
-            @ui="handleUI"
-          />
+          <component :is="currentViewComponent" v-bind="currentProps" @download="handleDownload" @run="handleRun"
+            @stop="handleStop" @ui="handleUI" />
         </keep-alive>
       </transition>
     </main>
@@ -48,7 +37,7 @@ import HomeView from './views/HomeView.vue'
 import MarketView from './views/MarketView.vue'
 import LocalView from './views/LocalView.vue'
 import DevicesView from './views/DevicesView.vue'
-import { MarketItem, LocalVersion, LocalPluginGroup, DeviceItem } from './types'
+import { LocalVersion, LocalPluginGroup, DeviceItem } from './types'
 
 export default defineComponent({
   name: 'App',
@@ -71,9 +60,17 @@ export default defineComponent({
         name: 'plugin-l136',
         desc: 'L136 高压测试套件',
         version: '1.2.0',
-        deps: ['serialport']
+        url: 'https://your-oss-bucket.com/plugins/l136/1.2.0.zip',
+        deps: ['serialport'],
       },
-      { id: 'p2', name: 'plugin-fft', desc: '频谱分析算法库', version: '2.0.0', deps: [] }
+      {
+        id: 'p2',
+        name: 'plugin-fft',
+        desc: '频谱分析算法库',
+        url: "https://your-oss-bucket.com/plugins/fft/2.0.0.zip",
+        version: '2.0.0',
+        deps: []
+      }
     ])
 
     const localData = ref<LocalPluginGroup[]>([
@@ -148,14 +145,22 @@ export default defineComponent({
 <style>
 /* --- 全局样式变量 (CSS Variables) --- */
 :root {
-  --bg-app: #121212; /* 整体背景 */
-  --bg-sidebar: #1e1e1e; /* 侧边栏背景 */
-  --surface: #1e1e1e; /* 卡片背景 */
-  --surface-light: #252526; /* 稍微亮一点的背景 */
-  --border: #333333; /* 边框颜色 */
-  --primary: #42b983; /* 主色调 (Vue绿) */
-  --text-main: #e0e0e0; /* 主文字 */
-  --text-sub: #858585; /* 次要文字 */
+  --bg-app: #121212;
+  /* 整体背景 */
+  --bg-sidebar: #1e1e1e;
+  /* 侧边栏背景 */
+  --surface: #1e1e1e;
+  /* 卡片背景 */
+  --surface-light: #252526;
+  /* 稍微亮一点的背景 */
+  --border: #333333;
+  /* 边框颜色 */
+  --primary: #42b983;
+  /* 主色调 (Vue绿) */
+  --text-main: #e0e0e0;
+  /* 主文字 */
+  --text-sub: #858585;
+  /* 次要文字 */
   --success: #89d185;
   --warning: #cca700;
   --danger: #f48771;
@@ -186,6 +191,7 @@ body {
   display: flex;
   flex-direction: column;
 }
+
 .logo-area {
   height: 60px;
   display: flex;
@@ -196,6 +202,7 @@ body {
   letter-spacing: 1px;
   border-bottom: 1px solid var(--border);
 }
+
 .logo-icon {
   color: var(--primary);
   margin-right: 8px;
@@ -205,6 +212,7 @@ body {
   flex: 1;
   padding: 16px 8px;
 }
+
 .nav-item {
   display: flex;
   align-items: center;
@@ -215,15 +223,18 @@ body {
   transition: all 0.2s;
   margin-bottom: 4px;
 }
+
 .nav-item:hover {
   background: rgba(255, 255, 255, 0.05);
   color: var(--text-main);
 }
+
 .nav-item.active {
   background: rgba(66, 185, 131, 0.15);
   color: var(--primary);
   font-weight: 500;
 }
+
 .nav-icon {
   margin-right: 12px;
   font-size: 16px;
@@ -236,6 +247,7 @@ body {
   align-items: center;
   gap: 12px;
 }
+
 .avatar {
   width: 32px;
   height: 32px;
@@ -246,10 +258,12 @@ body {
   place-items: center;
   font-weight: bold;
 }
+
 .user-info .name {
   font-size: 14px;
   font-weight: 500;
 }
+
 .user-info .role {
   font-size: 11px;
   color: var(--text-sub);
@@ -263,6 +277,7 @@ body {
   overflow: hidden;
   background: var(--bg-app);
 }
+
 .view-container {
   padding: 32px;
   flex: 1;
@@ -280,12 +295,14 @@ body {
   align-items: flex-end;
   margin-bottom: 32px;
 }
+
 .view-header h1 {
   margin: 0;
   font-size: 28px;
   font-weight: 600;
   letter-spacing: -0.5px;
 }
+
 .view-header .subtitle {
   margin: 4px 0 0;
   color: var(--text-sub);
@@ -299,6 +316,7 @@ body {
   border-radius: 12px;
   padding: 20px;
 }
+
 .btn {
   border: none;
   padding: 8px 16px;
@@ -308,22 +326,27 @@ body {
   cursor: pointer;
   transition: 0.2s;
 }
+
 .btn-primary {
   background: var(--primary);
   color: #000;
 }
+
 .btn-primary:hover {
   background: #3aa876;
 }
+
 .btn-outline {
   background: transparent;
   border: 1px solid var(--border);
   color: var(--text-main);
 }
+
 .btn-text {
   background: transparent;
   padding: 4px 8px;
 }
+
 .btn-text:hover {
   background: rgba(255, 255, 255, 0.05);
 }
@@ -331,12 +354,15 @@ body {
 .text-primary {
   color: var(--primary);
 }
+
 .text-danger {
   color: var(--danger);
 }
+
 .text-success {
   color: var(--success);
 }
+
 .text-sub {
   color: var(--text-sub);
 }
@@ -351,6 +377,7 @@ body {
   align-items: center;
   width: 260px;
 }
+
 .search-box input {
   background: transparent;
   border: none;
@@ -366,10 +393,12 @@ body {
 .fade-leave-active {
   transition: opacity 0.2s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
 }
+
 .font-mono {
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
 }

@@ -2,7 +2,7 @@ import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
 import { market } from './modules/market'
 // Custom APIs for renderer
-const api = {
+export const api = {
   market,
   mountPlugin: (pluginPath, rect) => ipcRenderer.invoke('plugin:mount', { pluginPath, rect }),
   unmountPlugin: (pluginId) => ipcRenderer.invoke('plugin:unmount', pluginId),

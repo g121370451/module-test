@@ -1,11 +1,3 @@
-export interface MarketItem {
-  id: string
-  name: string
-  desc: string
-  version: string
-  deps: string[]
-}
-
 export interface LocalVersion {
   version: string
   path: string

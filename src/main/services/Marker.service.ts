@@ -175,8 +175,8 @@ export class MarketService {
         version: '1.2.0',
         name: 'L136 插件',
         desc: 'L136 插件，提供视频处理功能',
-        url: 'https://your-oss-bucket.com/plugins/l136/1.2.0.zip',
-        deps: ['ffmpeg']
+        url: '"C:\\Users\\gpy\\Downloads\\ossutil-2.2.0-windows-amd64.zip"',
+        deps: ['ffmpeg-node','node-canvas-skia']
       }
     ]
   }
