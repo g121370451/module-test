@@ -4,8 +4,13 @@
       <div class="logo-area"><span class="logo-icon">⚡</span> KERNEL</div>
 
       <nav class="nav">
-        <div v-for="tab in tabs" :key="tab.id" class="nav-item" :class="{ active: currentTab === tab.id }"
-          @click="currentTab = tab.id">
+        <div
+          v-for="tab in tabs"
+          :key="tab.id"
+          class="nav-item"
+          :class="{ active: currentTab === tab.id }"
+          @click="currentTab = tab.id"
+        >
           <span class="nav-icon" v-html="tab.icon"></span>
           <span class="nav-label">{{ tab.label }}</span>
         </div>
@@ -23,8 +28,14 @@
     <main class="main-content">
       <transition name="fade" mode="out-in">
         <keep-alive>
-          <component :is="currentViewComponent" v-bind="currentProps" @download="handleDownload" @run="handleRun"
-            @stop="handleStop" @ui="handleUI" />
+          <component
+            :is="currentViewComponent"
+            v-bind="currentProps"
+            @download="handleDownload"
+            @run="handleRun"
+            @stop="handleStop"
+            @ui="handleUI"
+          />
         </keep-alive>
       </transition>
     </main>
@@ -38,7 +49,7 @@ import MarketView from './views/MarketView.vue'
 import LocalView from './views/LocalView.vue'
 import DevicesView from './views/DevicesView.vue'
 import { LocalVersion, LocalPluginGroup, DeviceItem } from './types'
-
+import { MarketItem } from '../../preload/types/market'
 export default defineComponent({
   name: 'App',
   components: { HomeView, MarketView, LocalView, DevicesView },
@@ -61,13 +72,13 @@ export default defineComponent({
         desc: 'L136 高压测试套件',
         version: '1.2.0',
         url: 'https://your-oss-bucket.com/plugins/l136/1.2.0.zip',
-        deps: ['serialport'],
+        deps: ['serialport']
       },
       {
         id: 'p2',
         name: 'plugin-fft',
         desc: '频谱分析算法库',
-        url: "https://your-oss-bucket.com/plugins/fft/2.0.0.zip",
+        url: 'https://your-oss-bucket.com/plugins/fft/2.0.0.zip',
         version: '2.0.0',
         deps: []
       }

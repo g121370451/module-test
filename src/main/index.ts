@@ -2,9 +2,8 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
-import { PluginManager } from './PluginManager'
 import bootstrap from './bootstrap'
-let pluginManager: PluginManager | null = null
+import { PluginService } from './services/PluginUi.service'
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -35,8 +34,8 @@ function createWindow(): void {
   } else {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
+  PluginService.getInstance().setMainWindow(mainWindow)
   bootstrap()
-  pluginManager = new PluginManager(mainWindow)
 }
 
 // This method will be called when Electron has finished
@@ -72,27 +71,6 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
   }
-})
-// 1. 加载并显示插件
-ipcMain.handle('plugin:mount', async (event, { pluginPath, rect }) => {
-  // rect 是 Vue 计算出的 DOM 区域: { x, y, width, height }
-  console.log(
-    `[Main] Mounting plugin from path: ${JSON.stringify(pluginPath)} with rect`,
-    JSON.stringify(rect)
-  )
-  const id = await pluginManager?.loadPlugin(pluginPath)
-  pluginManager?.activatePlugin(id, Math.floor(rect)) // 向下取整避免小数像素模糊
-  return id
-})
-
-// 2. 隐藏插件
-ipcMain.handle('plugin:unmount', (event, pluginId) => {
-  pluginManager?.hidePlugin(pluginId)
-})
-
-// 3. 窗口大小变化同步 (Vue 监听到 resize -> IPC -> Main 更新 View)
-ipcMain.on('plugin:update-bounds', (event, { pluginId, rect }) => {
-  pluginManager?.resizePlugin(pluginId, rect)
 })
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.

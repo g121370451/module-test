@@ -1,13 +1,11 @@
-import { contextBridge, ipcRenderer } from 'electron'
+import { contextBridge } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
 import { market } from './modules/market'
+import { plugin_ui } from './modules/plugin-ui'
 // Custom APIs for renderer
 export const api = {
   market,
-  mountPlugin: (pluginPath, rect) => ipcRenderer.invoke('plugin:mount', { pluginPath, rect }),
-  unmountPlugin: (pluginId) => ipcRenderer.invoke('plugin:unmount', pluginId),
-  updatePluginBounds: (pluginId, rect) =>
-    ipcRenderer.send('plugin:update-bounds', { pluginId, rect })
+  plugin_ui
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to

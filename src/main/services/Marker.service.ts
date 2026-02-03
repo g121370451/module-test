@@ -4,7 +4,7 @@ import fs from 'fs-extra'
 import axios from 'axios'
 import { pipeline } from 'stream/promises'
 import AdmZip from 'adm-zip'
-
+import { DownloadTask, MarketItem } from '../../preload/types/market'
 export class MarketService {
   private tasks: Map<string, DownloadTask> = new Map()
   private mainWindow: BrowserWindow
@@ -176,7 +176,7 @@ export class MarketService {
         name: 'L136 插件',
         desc: 'L136 插件，提供视频处理功能',
         url: '"C:\\Users\\gpy\\Downloads\\ossutil-2.2.0-windows-amd64.zip"',
-        deps: ['ffmpeg-node','node-canvas-skia']
+        deps: ['ffmpeg-node', 'node-canvas-skia']
       }
     ]
   }

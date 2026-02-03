@@ -1,4 +1,4 @@
-declare interface DownloadTask {
+export interface DownloadTask {
   id: string
   version: string
   progress: number
@@ -6,7 +6,7 @@ declare interface DownloadTask {
   error?: string
 }
 
-declare interface MarketItem {
+export interface MarketItem {
   id: string
   name: string
   desc: string

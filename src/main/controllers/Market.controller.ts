@@ -3,7 +3,7 @@ import { IpcController, IpcHandle } from '../modules/IpcDecorators'
 import { log } from '../modules/log'
 import main from 'electron/main'
 import { MarketService } from '../services/Marker.service'
-
+import type { DownloadTask, MarketItem } from '../../preload/types/market'
 @IpcController('/market')
 export default class MarketController {
   private installer: MarketService
