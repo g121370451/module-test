@@ -41,10 +41,7 @@ export const useMarketStore = defineStore('market', () => {
       const listRes = await window.api.market.list()
       if (listRes.code === 0) {
         // 重置列表，并保留之前的状态结构
-        marketList.value = listRes.data.map((item) => ({
-          ...item,
-          downloadState: undefined
-        }))
+        marketList.value = listRes.data
 
         // 2. 获取当前正在进行的任务 (同步进度)
         const tasksRes = await window.api.market.getTasks()
@@ -72,7 +69,7 @@ export const useMarketStore = defineStore('market', () => {
     // 乐观更新 UI (可选): 立即显示 pending 状态
     // item.downloadState = { id: item.id, version: item.version, status: 'pending', progress: 0 }
 
-    const res = await window.api.market.download(item)
+    const res = await window.api.market.download(JSON.parse(JSON.stringify(item)))
     if (res.code !== 0) {
       console.error('[Store] Download failed:', res.message)
       // 如果失败，清除状态

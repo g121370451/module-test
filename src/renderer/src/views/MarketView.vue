@@ -15,7 +15,7 @@
       <div v-for="item in marketList" :key="item.id" class="plugin-card">
         <div class="card-top">
           <h3>{{ item.name }}</h3>
-          <span class="badge">v{{ item.version }}</span>
+          <span class="badge">{{ item.version }}</span>
         </div>
 
         <div class="card-actions">

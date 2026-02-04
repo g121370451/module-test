@@ -61,9 +61,34 @@ export default class MarketController {
     try {
       // 调用 Service 层去获取数据
       const list = await this.installer.getMarketList()
-
-      log.info(`market/list: Successfully fetched ${list.length} plugins from market`)
-      return Result.success(list)
+      const installedIds = await this.installer.getInstalledIdentities()
+      const installedSet = new Set(installedIds)
+      let installedCount = 0;
+      let notInstalledCount = 0;
+      const mergedList = list.map((item: MarketItem) => {
+        const isInstalled = installedSet.has(`${item.id}@${item.version}`)
+        if (isInstalled) {
+          installedCount++;
+        } else {
+          notInstalledCount++;
+        }
+        if (isInstalled) {
+          return {
+            ...item,
+            // 如果本地已存在，将状态标记为已完成
+            downloadState: {
+              id: item.id,
+              version: item.version,
+              progress: 100,
+              status: 'completed'
+            }
+          } as MarketItem
+        } else {
+          return item;
+        }
+      })
+      log.info(`market/list: Fetched ${mergedList.length} market items, ${installedCount} installed, ${notInstalledCount} not installed`)
+      return Result.success(mergedList)
     } catch (e: unknown) {
       // 错误处理符合 ESLint 规范
       if (e instanceof Error) {

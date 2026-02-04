@@ -16,3 +16,8 @@ export interface MarketItem {
   // 前端辅助字段：当前的下载任务状态
   downloadState?: DownloadTask
 }
+export type UIInstance = BrowserWindow | WebContentsView
+export interface PluginViewItem {
+  ui: UIInstance
+  worker: Electron.UtilityProcessWorker
+}
