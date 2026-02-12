@@ -1,7 +1,6 @@
 import { join } from 'path'
 import { L136Service } from './L136Service'
-// ⚠️ 关键技巧 1：只导入 Electron 的类型接口
-// "import type" 会在编译成 JS 后被完全删除，所以不会在 Node 环境报错
+
 import type { BrowserWindow as BrowserWindowType } from 'electron'
 
 // ⚠️ 关键技巧 2：Vite 资源导入通常编译为字符串路径，放在顶层是安全的

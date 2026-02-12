@@ -201,6 +201,14 @@ export class MarketService {
                 desc: 'L136 插件，提供视频处理功能',
                 url: 'https://deepcool.io/module/l136/v1.2.0/app.zip',
                 deps: ['ffmpeg-node', 'node-canvas-skia']
+            },
+            {
+                id:'plugin-ffmpeg-player',
+                version:'v1.0.0',
+                name:'ffmplayer',
+                desc:'',
+                url:'https://deepcool.io/module/l136/v1.2.0/app.zip',
+                deps:['ffmpeg-node']
             }
         ]
     }

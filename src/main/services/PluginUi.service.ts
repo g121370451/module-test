@@ -46,7 +46,6 @@ export class PluginService {
     log.debug('123123123')
     // 2. 解析 ASAR 内的路径
     const { htmlPath, workPath, preloadPath } = this.resolvePaths(pluginId, version)
-
     try {
       let ui: UIInstance
 
@@ -85,6 +84,7 @@ export class PluginService {
       wc.postMessage('init-port', null, [port1]);
       // 将另一端发给 Worker
       worker.postMessage({ type: 'connect-to-ui' }, [port2]);
+      worker.postMessage({ type: 'deps:update', payload: [{ alias: 'ffmplayer-core', path: 'E:\\project\\deepcool\\nodejs\\module-test\\plugins\\ffmpeg-core', version: 'v1.0.0' }]}, [port2]);
       // 5. 持久化
       const pluginItem = {
         ui,
